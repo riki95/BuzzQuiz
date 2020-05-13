@@ -12,6 +12,10 @@ export class BuzzComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  reset() {
+    
+  }
+
   ngOnInit() {
     this.username = localStorage.getItem('username');
 
