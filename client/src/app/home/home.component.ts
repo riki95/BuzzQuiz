@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,13 +10,16 @@ export class HomeComponent implements OnInit {
 
   public username: string;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   submit() {
-    console.log(this.username);
+    localStorage.setItem('username', this.username);
+    this.router.navigate(['buzz']);
   }
 
   ngOnInit() {
+    if (localStorage.getItem('username'))
+      this.router.navigate(['buzz']);
   }
 
 }
