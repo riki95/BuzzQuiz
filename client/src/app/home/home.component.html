@@ -1,0 +1,18 @@
+<div class="row justify-content-md-center">
+
+  <div class="col col-md-4">
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Set your name</mat-label>
+        <input matInput placeholder="Ex. Player1" (input)="username=$event.target.value" required>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="button" (click)="submit()">SEND</button>
+
+    </form>
+
+
+  </div>
+
+
+</div>
