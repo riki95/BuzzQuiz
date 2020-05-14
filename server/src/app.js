@@ -14,7 +14,7 @@ app.get('/', (_req, res) => {
 });
 
 app.get('/api/*', (_req, res) => {
-	res.send('hi');
+	res.send('hi automatic deploy');
 });
 
 const server = http.Server(app);

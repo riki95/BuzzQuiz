@@ -1,3 +1,5 @@
 */node_modules/
-server/src/static/
 */.vscode
+*/static/
+*/src/static/
+TO_DEPLOY_FOLDER/

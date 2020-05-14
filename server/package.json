@@ -7,6 +7,10 @@
     "test": "npm run lint",
     "start": "node ./src/app.js"
   },
+  "engines": {
+    "node": "12.x",
+    "npm": "6.x"
+  },
   "dependencies": {
     "body-parser": "^1.6.4",
     "cors": "^2.8.1",
