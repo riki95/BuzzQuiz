@@ -11,5 +11,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Run a one-line script
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+
+    - name: Build Client
+      run: |
+        cd client
+        npm install
+        npm run build
+
+    - name: Deploy
       run: ./deploy.sh
