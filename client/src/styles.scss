@@ -5,3 +5,7 @@ body {
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
+
+.row {
+    margin: 0; /* To overwrite Bootstrap -15 row margin */
+}
