@@ -21,10 +21,6 @@ export class BuzzComponent implements OnInit {
     private socketService: SocketService
   ) { }
 
-  reset() {
-    
-  }
-
   ngOnInit() {
     this.username = localStorage.getItem('username');
 
@@ -32,6 +28,15 @@ export class BuzzComponent implements OnInit {
       this.router.navigate(['']);
 
       this.initIoConnection();
+  }
+
+  reset() {
+    
+  }
+
+  goHome() {
+    localStorage.removeItem('username');
+    this.router.navigate(['']);
   }
 
   private initIoConnection(): void {
