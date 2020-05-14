@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material';
 
+import { SocketService } from './shared/services/socket.service';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { MatIconModule } from '@angular/material';
     MatIconModule,
     MatListModule
   ],
-  providers: [],
+  providers: [
+    SocketService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
