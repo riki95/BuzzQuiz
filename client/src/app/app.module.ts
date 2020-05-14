@@ -10,9 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material';
-
-
 
 
 @NgModule({
@@ -27,7 +26,8 @@ import { MatIconModule } from '@angular/material';
     BrowserAnimationsModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
