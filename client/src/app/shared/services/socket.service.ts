@@ -4,7 +4,7 @@ import { Message } from '../model/message';
 
 import * as socketIo from 'socket.io-client';
 
-const SERVER_URL = 'http://localhost:4201';
+const SERVER_URL = 'http://localhost:3000';
 
 @Injectable()
 export class SocketService {
@@ -18,9 +18,9 @@ export class SocketService {
         this.socket.emit('message', message);
     }
 
-    public onMessage(): Observable<Message> {
-        return new Observable<Message>(observer => {
-            this.socket.on('message', (data: Message) => observer.next(data));
+    public onBuzz(): Observable<Array<Message>> {
+        return new Observable<Array<Message>>(observer => {
+            this.socket.on('buzzed', (data: Array<Message>) => observer.next(data));
         });
     }
 }

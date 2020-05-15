@@ -12,8 +12,8 @@ import { SocketService } from '../shared/services/socket.service';
 export class BuzzComponent implements OnInit {
 
   public username: string;
-  messages: Message[] = [];
-  messageContent: string;
+  public type: string;
+  buzzList: Array<Message> = null;
   ioConnection: any;
 
   constructor(
@@ -23,15 +23,12 @@ export class BuzzComponent implements OnInit {
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
+    this.type = localStorage.getItem('type');
 
-    if (!this.username)
+    if (!this.username || !this.type)
       this.router.navigate(['']);
 
       this.initIoConnection();
-  }
-
-  reset() {
-    
   }
 
   goHome() {
@@ -40,24 +37,22 @@ export class BuzzComponent implements OnInit {
   }
 
   private initIoConnection(): void {
+    var thisC = this;
     this.socketService.initSocket();
 
-    this.ioConnection = this.socketService.onMessage()
-      .subscribe((message: Message) => {
-        this.messages.push(message);
+    this.ioConnection = this.socketService.onBuzz()
+      .subscribe((buzzList: Array<Message>) => {
+        thisC.buzzList = buzzList;
       });
   }
 
   public sendMessage(message: string): void {
-    if (!message) {
-      return;
-    }
-
+    var thisC = this;
+    
     this.socketService.send({
-      username: this.username,
+      username: thisC.username,
       content: message
     });
-    this.messageContent = null;
   }
 
 }
