@@ -29,11 +29,11 @@ io.sockets.on('connection', function (socket) {
 		console.log(message);
 		if (message.content === 'reset') {
 			buzzList = [];
-			socket.emit('buzzed', buzzList);
+			io.sockets.emit('buzzed', buzzList);
 		}
 		else {
 			buzzList.push(message);
-			socket.emit('buzzed', buzzList);
+			io.sockets.emit('buzzed', buzzList);
 		}
 	})
 });

@@ -15,6 +15,7 @@ export class BuzzComponent implements OnInit {
   public type: string;
   buzzList: Array<Message> = null;
   ioConnection: any;
+  buzzSent: boolean = false;
 
   constructor(
     private router: Router,
@@ -42,13 +43,22 @@ export class BuzzComponent implements OnInit {
 
     this.ioConnection = this.socketService.onBuzz()
       .subscribe((buzzList: Array<Message>) => {
+        this.buzzSent = false;
         thisC.buzzList = buzzList;
       });
   }
 
-  public sendMessage(message: string): void {
+  public buzz(): void {
+    this.buzzSent = true;
+    this.sendMessage('buzz');
+  }
+
+  public reset(): void {
+    this.sendMessage('reset');
+  }
+
+  private sendMessage(message: string): void {
     var thisC = this;
-    
     this.socketService.send({
       username: thisC.username,
       content: message

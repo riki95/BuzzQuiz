@@ -14,7 +14,7 @@
 <div class="row justify-content-md-center" style="height: 500px;">
   <div *ngIf="type ==='Player'" class="col col-lg-6 text-center">
     <div>
-      <button mat-fab color="warn" class="buzzer" (click)="sendMessage('buzz')">
+      <button mat-fab color="warn" class="buzzer" (click)="buzz()" [disabled]="buzzSent">
         BUZZ
       </button>
     </div>
@@ -41,6 +41,6 @@
 
 <div *ngIf="type === 'Host'" class="row justify-content-md-center">
   <div class="col col-lg-6 text-center">
-    <button mat-raised-button color="accent" type="button" (click)="sendMessage('reset')">Reset</button>
+    <button mat-raised-button color="accent" type="button" (click)="reset()">Reset</button>
   </div>
 </div>
