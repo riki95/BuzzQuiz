@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ automatic-deploy-action ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+
+    - name: Build Client
+      run: |
+        cd client
+        npm install
+        npm run build
+
+    - name: Deploy
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      if: job.status == 'success'
+      run: |
+        echo $HEROKU_API_KEY
+        ./deploy.sh $HEROKU_API_KEY

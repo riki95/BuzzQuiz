@@ -3,14 +3,16 @@ DEPLOY_FOLDER='TO_DEPLOY_FOLDER'
 ORIGIN='https://git.heroku.com/buzz-quiz.git'
 DATE=`date '+%Y-%m-%d %H:%M'`
 
+HEROKU_API_KEY=$1
+
 # Clean previous deployment
 rm -rf $DEPLOY_FOLDER
 rm -rf client/static
 
 # Build client app
-cd client
-npm run build
-cd ..
+# cd client
+# npm run build
+# cd ..
 
 # Create folder to deploy
 mkdir $DEPLOY_FOLDER
@@ -23,14 +25,16 @@ cp server/Dockerfile $DEPLOY_FOLDER/Dockerfile
 cp -R server/src $DEPLOY_FOLDER/
 
 # Copy built client files
-cp -R client/static $DEPLOY_FOLDER/src/
+# cp -R client/static $DEPLOY_FOLDER/src/
 
+# Push on Heroku
 cd $DEPLOY_FOLDER
 git init
 git remote add origin $ORIGIN
 git add .
 git commit -m "Deploy ${DATE}"
-git push --set-upstream origin master -f
+git push https://heroku:$HEROKU_API_KEY@git.heroku.com/buzz-quiz.git origin/master:master
+# git push --set-upstream origin master -f
 
 # Clean build folders
 cd ..
