@@ -3,3 +3,4 @@
 */static/
 */src/static/
 TO_DEPLOY_FOLDER/
+.vscode/launch.json

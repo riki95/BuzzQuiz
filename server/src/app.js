@@ -22,6 +22,10 @@ const server = http.Server(app);
 var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
 	console.log('New connection');
+
+	socket.on('message', function (message) {
+		console.log(message);
+	})
 });
 
 server.listen(SERVER_PORT, () => console.log(`Starting server on port ${SERVER_PORT}`));

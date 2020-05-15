@@ -48,7 +48,8 @@ export class BuzzComponent implements OnInit {
       });
   }
 
-  public sendMessage(message: string): void {
+  public sendMessage(): void {
+    let message: string = 'buzz';
     if (!message) {
       return;
     }
