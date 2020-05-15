@@ -19,12 +19,16 @@ app.get('/api/*', (_req, res) => {
 
 const server = http.Server(app);
 
+var buzzList = [];
+
 var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
 	console.log('New connection');
 
 	socket.on('message', function (message) {
 		console.log(message);
+		buzzList.push(message);
+		socket.emit('buzzed', buzzList);
 	})
 });
 

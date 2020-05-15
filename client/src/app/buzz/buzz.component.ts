@@ -12,8 +12,7 @@ import { SocketService } from '../shared/services/socket.service';
 export class BuzzComponent implements OnInit {
 
   public username: string;
-  messages: Message[] = [];
-  messageContent: string;
+  buzzList: Array<Message> = null;
   ioConnection: any;
 
   constructor(
@@ -31,7 +30,6 @@ export class BuzzComponent implements OnInit {
   }
 
   reset() {
-    
   }
 
   goHome() {
@@ -42,23 +40,18 @@ export class BuzzComponent implements OnInit {
   private initIoConnection(): void {
     this.socketService.initSocket();
 
-    this.ioConnection = this.socketService.onMessage()
-      .subscribe((message: Message) => {
-        this.messages.push(message);
+    this.ioConnection = this.socketService.onBuzz()
+      .subscribe((buzzList: Array<Message>) => {
+        this.buzzList = buzzList;
       });
   }
 
   public sendMessage(): void {
     let message: string = 'buzz';
-    if (!message) {
-      return;
-    }
-
     this.socketService.send({
       username: this.username,
       content: message
     });
-    this.messageContent = null;
   }
 
 }
