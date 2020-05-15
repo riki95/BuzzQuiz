@@ -27,8 +27,14 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('message', function (message) {
 		console.log(message);
-		buzzList.push(message);
-		socket.emit('buzzed', buzzList);
+		if (message.content === 'reset') {
+			buzzList = [];
+			socket.emit('buzzed', buzzList);
+		}
+		else {
+			buzzList.push(message);
+			socket.emit('buzzed', buzzList);
+		}
 	})
 });
 

@@ -29,27 +29,26 @@ export class BuzzComponent implements OnInit {
       this.initIoConnection();
   }
 
-  reset() {
-  }
-
   goHome() {
     localStorage.removeItem('username');
     this.router.navigate(['']);
   }
 
   private initIoConnection(): void {
+    var thisC = this;
     this.socketService.initSocket();
 
     this.ioConnection = this.socketService.onBuzz()
       .subscribe((buzzList: Array<Message>) => {
-        this.buzzList = buzzList;
+        thisC.buzzList = buzzList;
       });
   }
 
-  public sendMessage(): void {
-    let message: string = 'buzz';
+  public sendMessage(message: string): void {
+    var thisC = this;
+    
     this.socketService.send({
-      username: this.username,
+      username: thisC.username,
       content: message
     });
   }
