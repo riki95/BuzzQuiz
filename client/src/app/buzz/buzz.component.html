@@ -1,3 +1,7 @@
+<button mat-icon-button color="primary" aria-label="Homepage" (click)="goHome()">
+  <mat-icon>home</mat-icon>
+</button>
+
 <div class="row justify-content-md-center">
   <div class="col col-lg-6 text-center">
     <h1>Buzz</h1>
@@ -15,11 +19,19 @@
     </div>
   </div>
 
-  <div class="col col-lg-6 text-center">
+  <div class="col col-lg-6 text-center streamArea">
     <h1>Ordine prenotazione</h1>
-    <p>{{username}}</p>
-    <p>{{username}}</p>
-    <p>{{username}}</p>
+
+    <mat-list class="chat-list">
+      <mat-list-item *ngFor="let message of messages">
+        <h4 mat-line>
+          <b>{{message.username}}</b>
+        </h4>
+        <p mat-line>
+          <span> {{message.content}} </span>
+        </p>
+      </mat-list-item>
+    </mat-list>
   </div>
 
 </div>
