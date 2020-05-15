@@ -27,8 +27,6 @@ cp -R client/static $DEPLOY_FOLDER/src/
 
 cd $DEPLOY_FOLDER
 git init
-git config --global user.email "automatic@deploy.com"
-git config --global user.name "Script"
 git remote add origin $ORIGIN
 git add .
 git commit -m "Deploy ${DATE}"
