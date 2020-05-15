@@ -4,7 +4,7 @@ import { Message } from '../model/message';
 
 import * as socketIo from 'socket.io-client';
 
-const SERVER_URL = 'http://localhost:4201';
+const SERVER_URL = 'http://localhost:3000';
 
 @Injectable()
 export class SocketService {
