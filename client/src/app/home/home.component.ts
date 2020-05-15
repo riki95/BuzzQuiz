@@ -9,11 +9,25 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   public username: string;
+  private type: string;
 
   constructor(private router: Router) { }
 
+  selectPlayer() {
+    this.type = 'Player';
+  }
+  selectHost() {
+    this.type = 'Host';
+  }
+
   submit() {
+    if (!this.username || !this.type) {
+      alert('Set username and type first');
+      return;
+    }
+
     localStorage.setItem('username', this.username);
+    localStorage.setItem('type', this.type);
     this.router.navigate(['buzz']);
   }
 

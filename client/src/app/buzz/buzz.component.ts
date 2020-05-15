@@ -12,6 +12,7 @@ import { SocketService } from '../shared/services/socket.service';
 export class BuzzComponent implements OnInit {
 
   public username: string;
+  public type: string;
   buzzList: Array<Message> = null;
   ioConnection: any;
 
@@ -22,8 +23,9 @@ export class BuzzComponent implements OnInit {
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
+    this.type = localStorage.getItem('type');
 
-    if (!this.username)
+    if (!this.username || !this.type)
       this.router.navigate(['']);
 
       this.initIoConnection();
