@@ -43,7 +43,9 @@ export class BuzzComponent implements OnInit {
 
     this.ioConnection = this.socketService.onBuzz()
       .subscribe((buzzList: Array<Message>) => {
-        this.buzzSent = false;
+        if (buzzList.length === 0)
+          this.buzzSent = false;
+          
         thisC.buzzList = buzzList;
       });
   }
