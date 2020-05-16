@@ -1,11 +1,16 @@
 const express = require('express');
 const http = require('http');
 const path = require('path');
+const socketIO = require('socket.io');
 
 
 const SERVER_PORT = process.env.PORT || 3000;
 
 const app = express();
+const server = http.Server(app);
+const io = socketIO(server);
+
+
 app.set('port', SERVER_PORT);
 app.use('/static', express.static(__dirname + '/static'));
 
@@ -13,13 +18,12 @@ app.get('/', (_req, res) => {
 	res.sendFile(path.join(__dirname + '/static/index.html'));
 });
 
-app.get('/api/*', (_req, res) => {
-	res.send('hi automatic deploy');
-});
+// DATA
+const users = {};
+let bookingList = [];
 
-const server = http.Server(app);
+// Web socket
 
-var buzzList = [];
 
 var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
