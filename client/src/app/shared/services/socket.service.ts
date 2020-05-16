@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Subject } from "rxjs";
 import { Message } from '../model/message';
 
-import * as socketIo from 'socket.io-client';
+import socketIo from 'socket.io-client';
 
 import { environment } from '../../../environments/environment';
 
+// NOTE: if you are not using docker probably you need that value instead
 // const SERVER_URL = 'http://localhost:3000';
 const SERVER_URL = environment.server_url;
 
@@ -13,17 +14,19 @@ const SERVER_URL = environment.server_url;
 export class SocketService {
     private socket;
 
-    public initSocket(): void {
+    public users = new Subject<string[]>();
+    public bookingList = new Subject();
+
+    public initConnection(username: string) {
         this.socket = socketIo(SERVER_URL);
+
+        this.socket.on('USERS_UPDATED', (data: string[]) => this.users.next(data));
+        this.socket.on('BOOKING_LIST_UPDATED', (data) => this.bookingList.next(data));
+
+        this.socket.emit('NEW_USER', { username });
     }
 
-    public send(message: Message): void {
-        this.socket.emit('message', message);
-    }
+    public userBooking() { this.socket.emit('USER_BOOKING'); }
 
-    public onBuzz(): Observable<Array<Message>> {
-        return new Observable<Array<Message>>(observer => {
-            this.socket.on('buzzed', (data: Array<Message>) => observer.next(data));
-        });
-    }
+    public userResetting() { this.socket.emit('USER_RESETTING'); }
 }
