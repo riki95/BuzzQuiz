@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { Subscription } from 'rxjs';
 
-import { Message } from '../shared/model/message';
+import { User, ListItem } from '../types';
+
 import { SocketService } from '../shared/services/socket.service';
+
 
 @Component({
   selector: 'app-buzz',
@@ -13,9 +16,12 @@ export class BuzzComponent implements OnInit {
 
   public username: string;
   public type: string;
-  buzzList: Array<Message> = null;
-  ioConnection: any;
-  buzzSent: boolean = false;
+
+  public users: User[] = [];
+  public bookingList: ListItem[] = [];
+
+  private bookingListSubscription: Subscription;
+  private usersSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -26,45 +32,37 @@ export class BuzzComponent implements OnInit {
     this.username = localStorage.getItem('username');
     this.type = localStorage.getItem('type');
 
-    if (!this.username || !this.type)
-      this.router.navigate(['']);
+    if (!this.username || !this.type) return this.goHome();
 
-      this.initIoConnection();
+    this.socketService.initConnection(this.username);
+
+    this.bookingListSubscription = this.socketService.bookingList
+      .subscribe((data) => this.bookingList = data);
+    this.usersSubscription = this.socketService.users
+      .subscribe((data) => this.users = data);
   }
 
-  goHome() {
-    localStorage.removeItem('username');
+  ngOnDestroy() {
+    this.bookingListSubscription.unsubscribe();
+    this.usersSubscription.unsubscribe();
+  }
+
+  public goHome() {
+    localStorage.clear();
     this.router.navigate(['']);
   }
 
-  private initIoConnection(): void {
-    var thisC = this;
-    this.socketService.initSocket();
-
-    this.ioConnection = this.socketService.onBuzz()
-      .subscribe((buzzList: Array<Message>) => {
-        if (buzzList.length === 0)
-          this.buzzSent = false;
-          
-        thisC.buzzList = buzzList;
-      });
+  public isBoooked() {
+    return this.bookingList
+      .filter(({ user }) => user === this.username)
+      .length > 0;
   }
 
-  public buzz(): void {
-    this.buzzSent = true;
-    this.sendMessage('buzz');
+  public buzzClick() {
+    this.socketService.userBooking();
   }
 
-  public reset(): void {
-    this.sendMessage('reset');
+  public resetClick() {
+    this.socketService.userResetting()
   }
-
-  private sendMessage(message: string): void {
-    var thisC = this;
-    this.socketService.send({
-      username: thisC.username,
-      content: message
-    });
-  }
-
 }
