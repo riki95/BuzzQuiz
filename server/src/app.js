@@ -18,6 +18,10 @@ app.get('/', (_req, res) => {
 	res.sendFile(path.join(__dirname + '/static/index.html'));
 });
 
+app.get('/healt', (_req, res) => {
+	res.send('OK');
+});
+
 // DATA
 const users = {};
 let bookingList = [];
