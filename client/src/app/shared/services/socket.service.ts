@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from "rxjs";
-import { Message } from '../model/message';
-
 import socketIo from 'socket.io-client';
+
+import { User, ListItem } from '../../types';
 
 import { environment } from '../../../environments/environment';
 
@@ -14,14 +14,20 @@ const SERVER_URL = environment.server_url;
 export class SocketService {
     private socket;
 
-    public users = new Subject<string[]>();
-    public bookingList = new Subject();
+    public users = new Subject<User[]>();
+    public bookingList = new Subject<ListItem[]>();
 
     public initConnection(username: string) {
         this.socket = socketIo(SERVER_URL);
 
-        this.socket.on('USERS_UPDATED', (data: string[]) => this.users.next(data));
-        this.socket.on('BOOKING_LIST_UPDATED', (data) => this.bookingList.next(data));
+        this.socket.on(
+            'USERS_UPDATED',
+            (data: User[]) => this.users.next(data),
+        );
+        this.socket.on(
+            'BOOKING_LIST_UPDATED',
+            (data: ListItem[]) => this.bookingList.next(data),
+        );
 
         this.socket.emit('NEW_USER', { username });
     }
