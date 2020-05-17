@@ -21,6 +21,7 @@
   padding: 1rem 1rem 0.5rem;
   background-color: #EFEFEF;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  flex-wrap: wrap-reverse;
 }
 
 .leave {
@@ -53,7 +54,6 @@
   justify-content: space-around;
   flex-wrap: wrap;
   -ms-flex-wrap: wrap;
-
   margin-top: 2rem;
 }
 
@@ -75,6 +75,9 @@
   -webkit-box-pack: flex-start;
   justify-content: flex-start;
   align-self: stretch;
+  width: calc(100% - 400px);
+  min-width: 310px;
+  height: 30rem;
   padding: 2rem;
   margin: 1rem 0;
   border-radius: 15px;
@@ -85,7 +88,7 @@
 .bookingListItem {
   color: black;
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  font-size: 3.75rem;
+  font-size: 3.25rem;
 }
 
 .buzzer {
