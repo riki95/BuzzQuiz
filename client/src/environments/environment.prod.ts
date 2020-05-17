@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  server_url: 'https://buzz-quiz.herokuapp.com/api/',
+  server_url: 'https://buzz-quiz.herokuapp.com/',
 };
