@@ -1,43 +1,43 @@
-<button mat-icon-button color="primary" aria-label="Homepage" (click)="goHome()">
-  <mat-icon>home</mat-icon>
-</button>
-
-<div class="row justify-content-md-center">
-  <div class="col col-lg-6 text-center">
-    <h1>Buzz</h1>
-    <p>{{username}}</p>
-    <p>{{type}}</p>
+<section class="background-section">
+  <div class="menu flex-row">
+    <h4 class="leave" (click)="goHome()">leave</h4>
+    <h1>{{username}}</h1>
+    <h3>{{type}}</h3>
   </div>
-</div>
+  <div class="list-users flex-row">
+    <h4>Online users:</h4>
+    <span *ngFor="let user of users">
+      <h5 class="user-chip">{{user}}</h5>
+    </span>
+  </div>
 
-
-<div class="row justify-content-md-center" style="height: 500px;">
-  <div *ngIf="type ==='Player'" class="col col-lg-6 text-center">
-    <div>
-      <button mat-fab color="warn" class="buzzer" (click)="buzzClick()" [disabled]="isBoooked()">
+  <div class="flex-row core">
+    <div class="buzz-container">
+      <button
+        mat-fab
+        color="warn"
+        class="buzzer"
+        (click)="buzzClick()"
+        [disabled]="isBoooked()"
+        *ngIf="type ==='Player'"
+      >
         BUZZ
       </button>
+      <button
+        mat-fab
+        color="warn"
+        class="buzzer"
+        (click)="resetClick()"
+        *ngIf="type ==='Host'"
+      >
+        Reset
+      </button>
+    </div>
+    <div class="list">
+      <h1>Booking order</h1>
+      <ol *ngFor="let item of bookingList">
+        <li><h3>{{item.user}}</h3></li>
+      </ol>
     </div>
   </div>
-
-  <div class="col col-lg-6 text-center streamArea">
-    <h1>Ordine prenotazione</h1>
-
-    <mat-list class="chat-list">
-      <mat-list-item *ngFor="let item of bookingList">
-        <h4 mat-line>
-          {{item.position}}<b>{{item.user}}</b>
-        </h4>
-      </mat-list-item>
-    </mat-list>
-  </div>
-
-</div>
-
-
-
-<div *ngIf="type === 'Host'" class="row justify-content-md-center">
-  <div class="col col-lg-6 text-center">
-    <button mat-raised-button color="accent" type="button" (click)="resetClick()">Reset</button>
-  </div>
-</div>
+</section>

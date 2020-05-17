@@ -1,10 +1,68 @@
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  .example-full-width {
-    width: 100%;
-  }
-  
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: space-between;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.background-section {
+  background-color: #DDDDDD;
+  height: 100%;
+  min-width: 100%;
+}
+
+.access-card {
+  background-color: #FFFFFF;
+  width: 80%;
+  height: auto;
+  max-width: 300px;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.access-card hr {
+  width: 80%;
+  border: 1px solid #DDDDDD;
+}
+
+.username-input {
+  width: 80%;
+  padding: 0.2rem 1rem;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.helper {
+  color: red;
+  text-align: right;
+  width: 80%;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.role-button {
+  width: 40%;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: #EFEFEF;
+  color: #212529;
+  text-align: center;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #673ab7;
+  color: #FFFFFF;
+}
