@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   public username: string;
   public usernameHelper: string;
   public typeHelper: string;
-  private type: string = DEFAULT;
+  public type: string = DEFAULT;
 
   constructor(private router: Router) { }
 
