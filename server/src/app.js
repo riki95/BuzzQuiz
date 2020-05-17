@@ -12,11 +12,8 @@ const io = socketIO(server);
 
 
 app.set('port', SERVER_PORT);
-app.use('/static', express.static(__dirname + '/static'));
+app.use('/', express.static(__dirname + '/static'));
 
-app.get('/', (_req, res) => {
-	res.sendFile(path.join(__dirname + '/static/index.html'));
-});
 
 app.get('/healt', (_req, res) => {
 	res.send('OK');
