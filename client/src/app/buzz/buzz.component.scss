@@ -78,8 +78,14 @@
   padding: 2rem;
   margin: 1rem 0;
   border-radius: 15px;
-  background-color: #EFEFEF;
+  background-color: #008000;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.bookingListItem {
+  color: black;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  font-size: 3.75rem;
 }
 
 .buzzer {
