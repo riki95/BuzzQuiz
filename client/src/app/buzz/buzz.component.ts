@@ -37,7 +37,12 @@ export class BuzzComponent implements OnInit {
     this.socketService.initConnection(this.username);
 
     this.bookingListSubscription = this.socketService.bookingList
-      .subscribe((data) => this.bookingList = data);
+      .subscribe((data) => {
+        this.bookingList = data
+        if (data.length === 1) { //First buzz
+          this.playBuzzAudio();
+        }
+      });
     this.usersSubscription = this.socketService.users
       .subscribe((data) => this.users = data);
   }
@@ -61,6 +66,13 @@ export class BuzzComponent implements OnInit {
 
   public buzzClick() {
     this.socketService.userBooking();
+  }
+
+  private playBuzzAudio() {
+    let audio = new Audio();
+    audio.src = 'assets/audio/buzzAudio.wav';
+    audio.load();
+    audio.play();
   }
 
   public resetClick() {
