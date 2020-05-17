@@ -49,6 +49,7 @@ export class BuzzComponent implements OnInit {
 
   public goHome() {
     localStorage.clear();
+    this.socketService.closeConnection();
     this.router.navigate(['']);
   }
 

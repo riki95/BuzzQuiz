@@ -35,4 +35,6 @@ export class SocketService {
     public userBooking() { this.socket.emit('USER_BOOKING'); }
 
     public userResetting() { this.socket.emit('USER_RESETTING'); }
+
+    public closeConnection() { this.socket.disconnect(); }
 }
