@@ -1,5 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
+@font-face {
+  font-family: BelWeb;
+  src: url('assets/fonts/BELWEB.woff2') format('woff2'),
+       url('assets/fonts/BELWEB.woff') format('woff'),
+       url('assets/fonts/BELWEB.ttf') format('truetype');
+}
+
 html, body { height: 100%; }
 body { 
     margin: 0; 
